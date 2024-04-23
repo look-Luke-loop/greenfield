@@ -1,0 +1,93 @@
+- Apresentação do GIT
+- Instalação do GIT
+- Criação da conta no GITHUB
+- Criar o primeiro repositório GIT
+- git bash
+- git init (iniciar um projeto GIT em um diretório)
+
+wget https://codeload.github.com/vmoll/geekhunter-docker-nodejsapp/zip/refs/heads/master
+
+mv master master.zip
+
+unzip master.zip
+
+- git status
+
+- Adicionar arquivos ao controle de versão
+
+git add .
+
+- Efetuando o primeiro commit
+
+git config --global user.email "humberto.ccs@gmail.com"
+git config --global user.name "Humberto Caetano"
+
+git commit -m "Commit inicial"
+
+- Mandando o comando para o GitHub
+
+git remote add origin https://github.com/humbertocaetano/Aula-1.git
+
+git push --set-upstream origin master
+
+- Criando uma nova versão
+
+Alterar o arquivo app.js
+
+git status
+
+git add .
+
+git commit -m "Funcionalidade nova linha"
+
+git push
+
+- Histórico de atualizações
+
+git reflog
+
+git reset --hard 72c2ed3
+
+git reflog
+
+git reset --hard fa426ad
+
+- Criando branches
+
+git branch
+
+git branch staging
+
+git checkout staging
+
+git branch
+
+* muda o arquivo app.js
+
+git add .
+git commit -m "Nova branch"
+
+git push
+
+git push --set-upstream origin staging
+
+- Merge de código
+
+git branch master
+
+git pull
+
+git merge staging
+
+git push
+
+- Criando uma branch a partir de um modelo
+
+git checkout -b nova-branch master
+
+git add .
+git commit -m "Verificando requests"
+git push --set-upstream origin nova-branch
+
+
+
