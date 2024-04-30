@@ -90,4 +90,10 @@ git commit -m "Verificando requests"
 git push --set-upstream origin nova-branch
 
 
+**sincronizar pasta do git na pasta do pc:
+(dá o git init depois configura email e usuario)
+git clone <url do repositório remoto>
+git pull origin master
+
+
 
