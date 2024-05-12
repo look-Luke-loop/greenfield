@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from "react";
 import styled from "styled-components"
 import axios from "axios"
-import {toast} from "react-toastify"
+import { toast } from "react-toastify"
 //FORM DO ENTREGADOR
 
 //tag gap dita a distância entre os campos numa flexbox.
@@ -52,8 +52,10 @@ const Form = ({getEntregadores, onEdit, setOnEdit}) => {
             user.nome.value = onEdit.nome
             user.email.value = onEdit.email
             user.fone.value = onEdit.fone
-            user.cidade.value = onEdit.cidade
             user.data_nascimento.value = onEdit.data_nascimento
+            user.cidade.value = onEdit.cidade
+            user.bairro.value = onEdit.bairro
+            user.senha.value = onEdit.senha
         }
     }, [onEdit])
 
@@ -66,8 +68,11 @@ const Form = ({getEntregadores, onEdit, setOnEdit}) => {
             !user.nome.value ||
             !user.email.value ||
             !user.fone.value ||
+            !user.data_nascimento.value ||
             !user.cidade.value ||
-            !user.data_nascimento.value
+            !user.bairro.value ||
+            !user.senha.value
+
         ){
             return toast.warn("Preencha todos os campos!")
         }
@@ -78,8 +83,10 @@ const Form = ({getEntregadores, onEdit, setOnEdit}) => {
                     nome: user.nome.value,
                     email: user.email.value,
                     fone: user.fone.value,
+                    data_nascimento: user.data_nascimento.value,
                     cidade: user.cidade.value,
-                    data_nascimento: user.data_nascimento.value
+                    bairro: user.bairro.value,
+                    senha: user.senha.value,
                 })
                 .then(({data}) => toast.success(data))
                 .catch(({data}) => toast.error(data))
@@ -89,8 +96,10 @@ const Form = ({getEntregadores, onEdit, setOnEdit}) => {
                     nome: user.nome.value,
                     email: user.email.value,
                     fone: user.fone.value,
+                    data_nascimento: user.data_nascimento.value,
                     cidade: user.cidade.value,
-                    data_nascimento: user.data_nascimento.value
+                    bairro: user.bairro.value,
+                    senha: user.senha.value,
                 })
                 .then(({data}) => toast.success(data))
                 .catch(({data}) => toast.error(data))
@@ -99,8 +108,10 @@ const Form = ({getEntregadores, onEdit, setOnEdit}) => {
         user.nome.value = "";
         user.email.value = "";
         user.fone.value = "";
-        user.cidade.value = "";
         user.data_nascimento.value = "";
+        user.cidade.value = "";
+        user.bairro.value = "";
+        user.senha.value = "";
 
         setOnEdit(null)
         getEntregadores()
@@ -109,6 +120,7 @@ const Form = ({getEntregadores, onEdit, setOnEdit}) => {
 //FORM DO ENTREGADOR
 
     return(
+        
         <FormContainer ref={ref} onSubmit={handleSubmit}>
             <InputArea>
                 <Label>Nome</Label>
@@ -123,15 +135,24 @@ const Form = ({getEntregadores, onEdit, setOnEdit}) => {
                 <Input name="fone"/>
             </InputArea>
             <InputArea>
+                <Label>Data de nascimento</Label>
+                <Input name="data_nascimento" type="date"/>
+            </InputArea>
+            <InputArea>
                 <Label>Cidade</Label>
                 <Input name="cidade"/>
             </InputArea>
             <InputArea>
-                <Label>Data de nascimento</Label>
-                <Input name="data_nascimento" type="date"/>
+                <Label>Bairro</Label>
+                <Input name="bairro"/>
+            </InputArea>
+            <InputArea>
+                <Label>Senha</Label>
+                <Input name="senha"/>
             </InputArea>
             <Button type="submit">CADASTRAR</Button>
         </FormContainer>
+
     );
 }
 

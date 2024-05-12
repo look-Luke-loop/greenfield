@@ -1,0 +1,5 @@
+- Criar sistema de login que direciona para perfil expecífico;
+- Dentro da área Perfil do entregador vizualisar Card expecífico;
+- Criar formulário de cadastro de produtos;
+- Os dados de título do formulário vão aparecer no Card;
+- 

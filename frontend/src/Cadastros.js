@@ -18,11 +18,35 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  ${(props) => !props.visible && 'display: none;'}
 `;
 
 const Title = styled.h2``;
 
-function App() {
+const ToggleButton = styled.input.attrs({ type: 'checkbox' })`
+  display: none;
+`;
+
+const ToggleLabel = styled.label`
+  display: block;
+  width: fit-content;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: white;
+  background-color: #347845;
+  margin-top: 20px;
+  padding: 5px;
+  border-radius: 5px;
+
+  
+`;
+
+const SecondContainer = styled(Container)`
+  display: ${(props) => (props.showSecondContainer ? 'flex' : 'none')};
+`;
+
+
+function Cadastros() {
   const [users, setUsers] = useState([])
   const [entregadores, setEntregadores] = useState([])
   const [onEdit, setOnEdit] = useState(null)
@@ -53,21 +77,37 @@ function App() {
     getEntregadores()
   },[setEntregadores])
 
+//-------------------------------------------------------------------------//
+
+  const [showFirstContainer, setShowFirstContainer] = useState(true);
+    const [showSecondContainer, setShowSecondContainer] = useState(false);
+
+    const handleToggle = () => {
+        setShowFirstContainer(!showFirstContainer);
+        setShowSecondContainer(!showSecondContainer);
+    };
+
   return (
     <>
-      <Container>
+      <Container visible={showFirstContainer}>
         <Title>USUÁRIOS</Title>
         <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
-        {/* <Grid users = {users} setUsers={setUsers} setOnEdit={setOnEdit}/> */}
+        <Grid users = {users} setUsers={setUsers} setOnEdit={setOnEdit}/>
+      </Container>
+
+      <SecondContainer showSecondContainer={showSecondContainer}>
         <Title>Entregador</Title>
         <FormEtg onEdit={onEdit} setOnEdit={setOnEdit} getEntregadores={getEntregadores}/>
-        {/* <GridEtg entregadores = {entregadores} setEntregadores={setEntregadores} setOnEdit={setOnEdit}/> */}
+        <GridEtg entregadores = {entregadores} setEntregadores={setEntregadores} setOnEdit={setOnEdit}/>
+      </SecondContainer>
 
-      </Container>
+      <ToggleButton id="toggleSecondContainer" onClick={handleToggle}/>
+      <ToggleLabel htmlFor="toggleSecondContainer">Cadastro entregador</ToggleLabel>
+
       <ToastContainer autoClose={4000} position="bottom-left"/>
       <GlobalStyle/>
     </>
   );
 }
 
-export default App;
+export default Cadastros;
