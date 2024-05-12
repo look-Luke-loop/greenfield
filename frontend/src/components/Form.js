@@ -52,6 +52,8 @@ const Form = ({getUsers, onEdit, setOnEdit}) => {
             user.email.value = onEdit.email
             user.fone.value = onEdit.fone
             user.data_nascimento.value = onEdit.data_nascimento
+            user.cidade.value = onEdit.cidade
+            user.bairro.value = onEdit.bairro
         }
     }, [onEdit])
 
@@ -64,7 +66,9 @@ const Form = ({getUsers, onEdit, setOnEdit}) => {
             !user.nome.value ||
             !user.email.value ||
             !user.fone.value ||
-            !user.data_nascimento.value
+            !user.data_nascimento.value||
+            !user.cidade.value||
+            !user.bairro.value
         ){
             return toast.warn("Preencha todos os campos!")
         }
@@ -75,7 +79,10 @@ const Form = ({getUsers, onEdit, setOnEdit}) => {
                     nome: user.nome.value,
                     email: user.email.value,
                     fone: user.fone.value,
-                    data_nascimento: user.data_nascimento.value
+                    data_nascimento: user.data_nascimento.value,
+                    cidade: user.cidade.value,
+                    bairro: user.bairro.value,
+                    senha: user.senha.value
                 })
                 .then(({data}) => toast.success(data))
                 .catch(({data}) => toast.error(data))
@@ -85,7 +92,10 @@ const Form = ({getUsers, onEdit, setOnEdit}) => {
                     nome: user.nome.value,
                     email: user.email.value,
                     fone: user.fone.value,
-                    data_nascimento: user.data_nascimento.value
+                    data_nascimento: user.data_nascimento.value,
+                    cidade: user.cidade.value,
+                    bairro: user.bairro.value,
+                    senha: user.senha.value
                 })
                 .then(({data}) => toast.success(data))
                 .catch(({data}) => toast.error(data))
@@ -95,6 +105,9 @@ const Form = ({getUsers, onEdit, setOnEdit}) => {
         user.email.value = "";
         user.fone.value = "";
         user.data_nascimento.value = "";
+        user.cidade.value = "";
+        user.bairro.value = "";
+        user.senha.value = "";
 
         setOnEdit(null)
         getUsers()
@@ -118,6 +131,18 @@ const Form = ({getUsers, onEdit, setOnEdit}) => {
             <InputArea>
                 <Label>Data de nascimento</Label>
                 <Input name="data_nascimento" type="date"/>
+            </InputArea>
+            <InputArea>
+                <Label>Cidade</Label>
+                <Input name="cidade"/>
+            </InputArea>
+            <InputArea>
+                <Label>Bairro</Label>
+                <Input name="bairro"/>
+            </InputArea>
+            <InputArea>
+                <Label>Senha</Label>
+                <Input name="senha"/>
             </InputArea>
             <Button type="submit">CADASTRAR</Button>
         </FormContainer>

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { FaTrash, FaEdit } from "react-icons/fa";
-import { toast } from "react-toastify";
+//import { FaTrash } from "react-icons/fa";
+//import { toast } from "react-toastify";
+import { useLocation } from 'react-router-dom';
 
 const CardContainer = styled.div`
   width: 100%;
@@ -33,42 +34,65 @@ const CardTitle = styled.h2`
 
 const CardBody = styled.p``;
 
-const Grid = ({ users, setUsers, setOnEdit }) => {
-  // const handleEdit = (item) => {
-  //   setOnEdit(item);
-  // };
+const Grid = ({ users, }) => {
+    //const location = useLocation();
+    const userId = localStorage.getItem('userId');
+    //const userId = location.state  ? location.state.userId : null;
+    const [filtrarUsers, setFiltrarUsers] = useState([]); //Vamos filtrar os usuários que virão do get na página Entregadores por meio da users
+    const [atualUser, setAtualUser] = useState(null);
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete("http://localhost:8800/users/" + id);
-      const newArray = users.filter((user) => user.id !== id);
-      setUsers(newArray);
-      toast.success("Usuário excluído com sucesso");
-    } catch (error) {
-      console.error("Erro ao excluir usuário:", error);
-      toast.error("Erro ao excluir usuário");
+    useEffect(() => {
+      const fetchAtualUser = async () => {
+      try {
+        if (userId) {
+          const response = await axios.get(`http://localhost:8800/users/${userId}`);
+          setAtualUser(response.data);
+          console.log(response.data)
+        }
+      } catch (error) {
+        console.error('Erro ao buscar dados do usuário:', error);
+      }
+    };
+
+    fetchAtualUser();
+  }, [userId]);
+
+  useEffect(() => {
+    if (atualUser) {
+      // Filtrar os usuários com base nos dados de cidade e bairro do usuário atual
+      const filtered = users.filter(user => user.cidade === atualUser.cidade && user.bairro === atualUser.bairro);
+      setFiltrarUsers(filtered);
     }
-    setOnEdit(null);
-  };
+  }, [atualUser, users]);
 
   return (
+    <>
+        <div>
+             {userId ? (
+                <p>O ID do usuário é: {userId}</p>
+            ) : (
+                <p>O ID do usuário não está disponível.</p>
+              )}
+         </div>
     <CardContainer>
-      {users.map((item, i) => (
+      {filtrarUsers.map((item, i) => (
         <Card key={i}>
           <CardHeader>
             <CardTitle>{item.nome}</CardTitle>
-            <div>
-              {/* <FaEdit onClick={() => handleEdit(item)} /> */}
+            {/* <div>
+              <FaEdit onClick={() => handleEdit(item)} />
               <FaTrash onClick={() => handleDelete(item.id)} />
-            </div>
+            </div> */}
           </CardHeader>
           <CardBody>{item.email}</CardBody>
           <CardBody>Fone: {item.fone}</CardBody>
           <CardBody>Cidade: {item.cidade}</CardBody>
+          <CardBody>Bairro: {item.bairro}</CardBody>
           <CardBody>{item.data_nascimento}</CardBody>
         </Card>
       ))}
     </CardContainer>
+    </>
   );
 };
 

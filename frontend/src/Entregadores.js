@@ -6,6 +6,8 @@ import {toast, ToastContainer} from "react-toastify"; //Toast possibilita a cria
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios"
 
+
+
 const Container = styled.div`
   width: 100%;
   max-width: 800px;
@@ -16,7 +18,7 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const Title = styled.h2``;
+const Title = styled.h1``;
 
 const Entregadores = () =>{
     const [users, setUsers] = useState([])
@@ -28,6 +30,7 @@ const Entregadores = () =>{
         setUsers(res.data.sort((a,b) => (a.nome > b.nome ? 1 : -1)))
         } catch (error){
         toast.error(error)
+        console.error('Erro ao obter usuários:', error);
         }
     }
 
