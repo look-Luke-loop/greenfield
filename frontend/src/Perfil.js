@@ -43,6 +43,7 @@ const Entregadores = () =>{
                 <Title>Perfil do Entregador</Title>
                 <Card entregadores = {entregadores} setEntregadores={setEntregadores} setOnEdit={setOnEdit}/>
                 <FormEtg onEdit={onEdit} setOnEdit={setOnEdit} getEntregadores={getEntregadores}/>
+                <ToastContainer autoClose={4000} position="bottom-left"/>
                 <GlobalStyle/>
             </Container>
         </>
