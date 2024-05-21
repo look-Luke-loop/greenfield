@@ -29,8 +29,9 @@ CREATE TABLE `produtos` (
   `descricao` varchar(255) NOT NULL,
   `id_entregador` int NOT NULL,
   `nome_do_produto` varchar(50) NOT NULL,
+  `preco` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +40,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (1,'Camiseta branca de algodão',1,'Camiseta básica'),(2,'Calça jeans rasgada estilo vintage',2,'Calça jeans fashion'),(3,'Tênis de corrida ultraleve',3,'Tênis esportivo'),(4,'Relógio de pulso analógico elegante',1,'Relógio clássico'),(5,'Bolsa de couro sintético resistente',2,'Bolsa moderna');
+INSERT INTO `produtos` VALUES (101,'Camiseta branca de algodão',1,'Camiseta básica',15.55),(102,'Calça jeans rasgada estilo vintage',2,'Calça jeans fashion',15.5),(103,'Tênis de corrida ultraleve',3,'Tênis esportivo',200.5),(104,'Relógio de pulso analógico elegante',1,'Relógio clássico',90.3),(105,'Bolsa de couro sintético resistente',2,'Bolsa moderna',399.5),(106,'Um incrível dispositivo multifuncional para uso diário.',1,'Multifuncional Prime',100),(107,'Gadget avançado para simplificar suas tarefas tecnológicas.',2,'Tech Simplifier X200',101.1),(108,'A ferramenta definitiva para entusiastas de cozinha.',3,'ChefMaster Pro',40.6),(109,'Um acessório elegante e funcional para o seu escritório.',4,'Office Elegance Suite',5.99),(110,'O companheiro perfeito para suas aventuras ao ar livre.',5,'Outdoor Explorer Gear',599),(111,'Solução inovadora para suas necessidades de jardinagem.',1,'Garden Wizard Kit',9.99),(112,'Tecnologia de ponta para sua experiência de entretenimento.',2,'Entertainment Hub Ultra',5.99),(113,'Aparelho fitness para manter seu corpo em forma.',3,'Fitness Tracker Max',7.66),(114,'Equipamento de segurança para sua casa inteligente.',4,'Smart Home Guardian',9.59),(115,'Produto ecológico para um estilo de vida sustentável.',5,'EcoLiving Essentials',79.6);
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-13 19:09:43
+-- Dump completed on 2024-05-21 10:18:37
