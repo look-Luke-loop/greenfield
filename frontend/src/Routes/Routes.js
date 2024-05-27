@@ -9,7 +9,7 @@ import Menu from '../Menu/Menu';
 import Cadastro from "../Cadastros.js"
 import Entregadores from "../Entregadores.js"
 import Perfil from "../Perfil.js"
-
+import GridPedidoetg from "../components/gridpedidoetg.js";
 import NoPage from "../components/NoPage.js";
 
 
@@ -24,6 +24,7 @@ const AppRoutes =()=>{
                 <Route path="/cadastro" element={<Cadastro/>}></Route>
                 <Route path="/entregadores" element={<Entregadores/>}></Route>
                 <Route path="/perfil" element={<Perfil/>}></Route>
+                <Route path="/entregador/pedidos" element={<GridPedidoetg/>}></Route>
                 {/*
                 <Route path="/contact" element={<Contact/>}></Route>
                 <Route path="/lermais" element={<LerMais/>}></Route>

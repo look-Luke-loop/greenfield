@@ -12,7 +12,8 @@ getEntregadores, getEntregadorById, addEntregador, updateEntregador,
     getPedidosEntregadoresById,
     addItemCarrinho,
     deleteItemCarrinho,
-    updateItemCarrinho
+    updateItemCarrinho,
+    getInfoByIdPedido
 
 } from "../controllers/pedidos.js"
 
@@ -55,7 +56,10 @@ router.get("/entregadores/produtos/:id", getProdutoById);
 
 router.get("/users/pedidos/:id", getPedidosById);
 
-router.get("/entregadores/pedidos/:id", getPedidosEntregadoresById);
+//router.get("/entregadores/pedidos/:id", getPedidosEntregadoresById);
+
+//dá informações de pedido + carrinho + itens
+router.get("/entregadores/pedidos/:id", getInfoByIdPedido);
 
 router.get("/users/carrinho/:id", getCarrinhoById);
 
@@ -64,6 +68,7 @@ router.post("/users/carrinho", addItemCarrinho);
 router.delete("/users/carrinho/:id", deleteItemCarrinho);
 //em construção
 router.put("/users/carrinho/:id", updateItemCarrinho);
+
 
 export default router;
 

@@ -57,7 +57,7 @@ const Grid = ({entregadores, setEntregadores, setOnEdit}) =>{
 
     const handleDelete = async (id) => {
         await axios
-            .delete("http://localhost:8800/entregadores/"+id)
+            .delete("http://localhost:8800/entregadores/"+ id)
             .then(({data}) => {
                 const newArray = entregadores.filter((entregador) => entregador.id !== id)
                 setEntregadores(newArray)

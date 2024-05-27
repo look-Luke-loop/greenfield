@@ -30,6 +30,7 @@ const Menu = ()=>{
                 <Link to="/entregadores">Entregadores</Link>
                 <Link to="/compras">Compras</Link>
                 <Link to="/perfil">Perfil</Link>
+                <Link to="/entregador/pedidos">Listar Pedidos</Link>
                 <Button onClick={handleLogout}>Sair</Button>
             </nav>
         </header>

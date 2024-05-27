@@ -14,7 +14,7 @@ export const getProdutoById = (req, res) => {
         }
     })
 }
-//pega o carrinho por id de pedido lista de pedidos + detalhes dos itens
+//pega o carrinho por id de usuario lista de pedidos + detalhes dos itens
 export const getCarrinhoById = (req, res) => {
     const q =
     `SELECT 
@@ -49,6 +49,65 @@ export const getCarrinhoById = (req, res) => {
         }
     })
 }
+
+//pega os pedidos + detalhes do carrinho e itens
+export const getInfoByIdPedido = (req, res) => {
+    const q =
+    `SELECT
+    p.id AS pedido_id,
+    p.id_entregador,
+    p.data_pedido,
+    p.endereco_entrega,
+    p.total_pedido,
+    p.avaliacao,
+    p.estado,
+    p.data_entrega,
+    cp.id AS cestaprodutos_id,
+    cp.id_produto,
+    cp.qtd,
+    cp.precouni,
+    cp.preco_total,
+    pr.descricao AS produto_descricao,
+    pr.nome_do_produto,
+    pr.preco
+FROM
+    pedido p
+LEFT JOIN
+    cestaprodutos cp ON p.id = cp.id_pedido
+LEFT JOIN
+    produtos pr ON cp.id_produto = pr.id
+WHERE
+    p.id_entregador = ?`
+
+    db.query(q, [req.params.id], (err, result) => {
+        if(err) {
+            return res.status(500).json({ error: 'Erro ao buscar carrinho!', message: err.message });
+        }else{
+            
+            return res.status(200).json(result);
+        }
+    })
+
+    // formato de exportação de json:
+
+	// "pedido_id": 1,
+	// "id_entregador": 2,
+	// "data_pedido": "2024-05-13T22:20:25.000Z",
+	// "endereco_entrega": "Rua Não Principal, 143",
+	// "total_pedido": "30.00",
+	// "avaliacao": null,
+	// "estado": 1,
+	// "data_entrega": null,
+	// "cestaprodutos_id": 3,
+	// "id_produto": 103,
+	// "qtd": 3,
+	// "precouni": 8.5,
+	// "preco_total": 25.5,
+	// "produto_descricao": "Tênis de corrida ultraleve",
+	// "nome_do_produto": "Tênis esportivo",
+	// "preco": 200.5
+	
+}
 //pega os pedidos por id de cliente
 export const getPedidosById = (req, res) => {
     const q = "SELECT * FROM pedido WHERE `id_user` = ?"
@@ -64,7 +123,20 @@ export const getPedidosById = (req, res) => {
     })
 }
 
-//pega os pedidos por id de entregador
+export const getPedidosByIdEntregador = (req, res) => {
+    const q = "SELECT * FROM pedido WHERE `id_entregador` = ?"
+
+    db.query(q, [req.params.id], (err, result) => {
+        if(err) {
+            return res.status(500).json({ error: 'Erro ao buscar produtos do vendedor /n', message: err.message });
+        }else{
+
+            return res.status(200).json(result);
+    
+        }
+    })
+}
+//pega os pedidos por id de entregador(sem uso)
 export const getPedidosEntregadoresById = (req, res) => {
     const q = "SELECT * FROM pedido WHERE `id_entregador` = ?"
 
