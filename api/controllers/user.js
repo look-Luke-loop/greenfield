@@ -203,3 +203,129 @@ export const loginEtg = (req, res) => {
         }
     });
 };
+
+//-------------------------------------------------------------------------------------------------//
+
+//Funções de controle de produto
+
+export const getProdutos = (_, res) => {
+    const q = "SELECT * FROM produtos";
+
+    db.query(q, (err, data) => {
+        if (err) return res.json(err)
+
+        return res.status(200).json(data)
+    })
+}
+
+export const getProdutosById = (req, res) => {
+    const q = "SELECT * FROM produtos WHERE `id` = ?"
+
+    db.query(q, [req.params.id], (err, result) => {
+        if(err) {
+            return res.status(500).json({ error: 'Erro ao buscar produto', message: err.message });
+        }
+
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'Produto não encontrado' });
+        }
+
+        return res.status(200).json(result); // Retorna todos os resultados encontrados
+        
+        //return res.status(200).json("Usuário encontrado com sucesso.")
+    })
+}
+
+export const addProdutos = (req, res) => {
+    const q = "INSERT INTO produtos(`id`,`nome`, `valor`) VALUES(?)";
+    
+    const values = [
+        req.body.id,
+        req.body.nome,
+        req.body.valor,
+
+    ];
+
+    db.query(q, [values], (err) => {
+        if(err) return res.json(err);
+
+        return res.status(200).json("Produto criado com sucesso.")
+    })
+}
+
+export const updateProdutos = (req, res) => {
+    const q = "UPDATE produtos SET `nome` = ?, `valor` = ? WHERE `id` = ?"
+
+    const values = [
+        req.body.id,
+        req.body.nome,
+        req.body.valor,
+    ];
+
+    db.query(q,[...values, req.params.id], (err) =>{
+        if (err) return res.json(err);
+
+        return res.status(200).json("Produto atualizado com sucesso.")
+    })
+
+}
+
+export const deleteProdutos = (req, res) => {
+    const q = "DELETE FROM produtos WHERE `id` = ?"
+
+    db.query(q, [req.params.id], (err) => {
+        if(err) return res.json(err)
+
+        return res.status(200).json("Produto deletado com sucesso.")
+    })
+}
+
+//-------------------------------------------------------//
+//Criando carrinho
+
+export const addPedidos = (req, res) => {
+
+    const { userId, id_etg, nome, valor, quantidade } = req.body;
+
+    const q = "INSERT INTO pedidos (userId, id_etg, nome, valor, quantidade) VALUES (?, ?, ?, ?, ?)";
+    const values = [userId, id_etg, nome, valor, quantidade];
+
+    db.query(q, values, (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao inserir pedido', message: err.message });
+        }
+
+        return res.status(201).json({ message: 'Pedido inserido com sucesso' });
+    });
+}
+
+//Busca por Id de Usuário:
+
+export const getCarrinhoById = (req, res) => {
+    const userId = req.params.userId;
+
+    const q = "SELECT * FROM pedidos WHERE userId = ?";
+    db.query(q, [userId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao buscar pedidos', message: err.message });
+        }
+
+        return res.status(200).json(result);
+    });
+}
+
+//Busca pedidos para o perfil do entregador
+
+export const getRecebidosById = (req, res) => {
+    const userId = req.params.userId;
+
+    const q = "SELECT * FROM pedidos WHERE id_etg = ?";
+    db.query(q, [userId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao buscar pedidos', message: err.message });
+        }
+
+        return res.status(200).json(result);
+    });
+}
+

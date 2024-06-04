@@ -9,6 +9,8 @@ import Menu from '../Menu/Menu';
 import Cadastro from "../Cadastros.js"
 import Entregadores from "../Entregadores.js"
 import Perfil from "../Perfil.js"
+import Produtos from "../compProdutos/Produtos.js"
+import Carrinho from "../Carrinho.js"
 
 import NoPage from "../components/NoPage.js";
 
@@ -24,6 +26,8 @@ const AppRoutes =()=>{
                 <Route path="/cadastro" element={<Cadastro/>}></Route>
                 <Route path="/entregadores" element={<Entregadores/>}></Route>
                 <Route path="/perfil" element={<Perfil/>}></Route>
+                <Route path="/produtos/:id" element={<Produtos/>}></Route>
+                <Route path="/carrinho" element={<Carrinho/>}></Route>
                 {/*
                 <Route path="/contact" element={<Contact/>}></Route>
                 <Route path="/lermais" element={<LerMais/>}></Route>

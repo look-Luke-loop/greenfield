@@ -1,7 +1,9 @@
 import express from "express"
 import { getUsers, getUserById, addUser, updateUser, deleteUser,
 getEntregadores, getEntregadorById, addEntregador, updateEntregador,
- deleteEntregador, login, loginEtg } from "../controllers/user.js"
+ deleteEntregador, login, loginEtg, 
+ getProdutos, getProdutosById, addProdutos, updateProdutos, deleteProdutos,
+ addPedidos, getCarrinhoById, getRecebidosById} from "../controllers/user.js"
 
 const router = express.Router()
 
@@ -17,7 +19,7 @@ router.delete("/users/:id", deleteUser)
 
 //router.get('/cards', getUsers)
 
-// Rotas para entregadores
+// Rotas para entregadores:
 router.get("/entregadores", getEntregadores);
 
 router.get("/entregadores/:id", getEntregadorById);
@@ -28,10 +30,28 @@ router.put("/entregadores/:id", updateEntregador);
 
 router.delete("/entregadores/:id", deleteEntregador);
 
-//Rotas para Login
+//Rotas para Login:
+router.post("/users/login", login);
 
- router.post("/users/login", login);
+router.post("/entregadores/loginEtg", loginEtg);
 
- router.post("/entregadores/loginEtg", loginEtg);
+//Produtos:
+router.get("/produtos", getProdutos)
+
+router.get("/produtos/:id", getProdutosById)
+
+router.post("/produtos", addProdutos)
+
+router.put("/produtos/:id", updateProdutos)
+
+router.delete("/produtos/:id", deleteProdutos)
+
+//Pedidos:
+
+router.post("/pedidos", addPedidos)
+
+router.get("/pedidos/:userId", getCarrinhoById)
+
+router.get("/recebidos/:userId", getRecebidosById)
 
 export default router

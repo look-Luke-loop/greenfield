@@ -28,7 +28,7 @@ const Menu = ()=>{
             <nav>
                 <Link to="/">Login</Link>
                 <Link to="/entregadores">Entregadores</Link>
-                <Link to="/compras">Compras</Link>
+                <Link to="/carrinho">Carrinho</Link>
                 <Link to="/perfil">Perfil</Link>
                 <Button onClick={handleLogout}>Sair</Button>
             </nav>

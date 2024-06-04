@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 //import { FaTrash } from "react-icons/fa";
 //import { toast } from "react-toastify";
-import { useLocation } from 'react-router-dom';
+import {Link} from 'react-router-dom'
 
 const CardContainer = styled.div`
   width: 100%;
@@ -40,6 +40,7 @@ const Grid = ({ users, }) => {
     //const userId = location.state  ? location.state.userId : null;
     const [filtrarUsers, setFiltrarUsers] = useState([]); //Vamos filtrar os usuários que virão do get na página Entregadores por meio da users
     const [atualUser, setAtualUser] = useState(null);
+    
 
     useEffect(() => {
       const fetchAtualUser = async () => {
@@ -89,6 +90,7 @@ const Grid = ({ users, }) => {
           <CardBody>Cidade: {item.cidade}</CardBody>
           <CardBody>Bairro: {item.bairro}</CardBody>
           <CardBody>{item.data_nascimento}</CardBody>
+          <Link to={`/produtos/${item.id}`}>Produtos</Link>
         </Card>
       ))}
     </CardContainer>

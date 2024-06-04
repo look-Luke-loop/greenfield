@@ -92,13 +92,13 @@ function Cadastros() {
       <Container visible={showFirstContainer}>
         <Title>USUÁRIOS</Title>
         <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
-        <Grid users = {users} setUsers={setUsers} setOnEdit={setOnEdit}/>
+        {/* <Grid users = {users} setUsers={setUsers} setOnEdit={setOnEdit}/> */}
       </Container>
 
       <SecondContainer showSecondContainer={showSecondContainer}>
         <Title>Entregador</Title>
         <FormEtg onEdit={onEdit} setOnEdit={setOnEdit} getEntregadores={getEntregadores}/>
-        <GridEtg entregadores = {entregadores} setEntregadores={setEntregadores} setOnEdit={setOnEdit}/>
+        {/* <GridEtg entregadores = {entregadores} setEntregadores={setEntregadores} setOnEdit={setOnEdit}/> */}
       </SecondContainer>
 
       <ToggleButton id="toggleSecondContainer" onClick={handleToggle}/>

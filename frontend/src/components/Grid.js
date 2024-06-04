@@ -78,7 +78,6 @@ const Grid = ({users, setUsers, setOnEdit}) =>{
                             <FaTrash onClick={()=> handleDelete(item.id)}/>
                         </Td>
                         <Td ></Td>
-
                     </Tr>
 
                 ))}

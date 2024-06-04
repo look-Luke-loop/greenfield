@@ -4,6 +4,6 @@ export const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "greenfield"
+    database: "crudreact"
 })
 

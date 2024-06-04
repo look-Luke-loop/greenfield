@@ -65,6 +65,16 @@ const Grid = ({ entregadores, setEntregadores, setOnEdit }) => {
   //   }
   // }, [atualUser, entregadores]);
 
+
+  const fetchEntregadores = async () => {
+    try {
+        const response = await axios.get("http://localhost:8800/entregadores/");
+        return response.data.sort((a, b) => (a.nome > b.nome ? 1 : -1));
+    } catch (error) {
+        throw new Error("Erro ao buscar os entregadores.");
+    }
+};
+
 //-----------------------------------------------------------------------------------------------------------------------//
   const handleEdit = (item) => {
     setOnEdit(item);
